@@ -78,7 +78,7 @@ $route['faq'] = 'general/faq';
 $route['contacts'] = 'general/contacts';
 $route['documentation'] = 'general/documentation';
 $route['transaction-history-pane'] = 'ajax/transaction_history_pane';
-
+$route['connect'] = 'home/connect';
 
 // For Associates
 $route['associate'] = 'associate/dashboard';
