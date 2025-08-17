@@ -106,7 +106,7 @@
     </p>
 
     <!-- Continue Button -->
-    <a href="<?=base_url()?>/link-wallet"><button class="btn btn-purple">
+    <a href="<?=base_url()?>/home"><button class="btn btn-purple">
      Return To Home Page
     </button></a>
   </div>
