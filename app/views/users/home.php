@@ -86,22 +86,6 @@
 
             <!-- fix for small devices only -->
             <div class="clearfix visible-sm-block"></div>
-
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="info-box">
-                    <span class="info-box-icon bg-red-active"><i class="fa fa-line-chart"></i></span>
-
-                    <div class="info-box-content">
-                        <span class="info-box-text">Investment</span>
-                        <span
-                            class="info-box-number"><?php echo USD . number_format($this->Util_model->sum_field("investment", "amount", "WHERE uid=" . $this->session->userdata(UID) . " AND status=0"), 2); ?></span>
-                        <small class="text-muted"><span class="label label-default sm">Profit</span>
-                            <?php echo $this->General_model->get_balance($this->session->userdata(UID), true, true, 'ROI'); ?></small>
-                    </div>
-                    <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
-            </div>
             <!-- /.col -->
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
@@ -147,16 +131,13 @@
                 <a href="<?php echo base_url(); ?>withdraw" class="btn btn-primary btn-block">Withdraw</a>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 top-1x">
-                <a href="<?php echo base_url(); ?>forex-plan" class="btn btn-primary btn-block">Invest</a>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 top-1x">
                 <a href="<?php echo base_url(); ?>referrals" class="btn btn-primary btn-block">My Network</a>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 top-1x">
                 <a href="<?php echo base_url(); ?>link-wallet" class="btn btn-primary btn-block">Link Wallet</a>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 top-1x">
-                <a href="<?php echo base_url(); ?>fund-card" class="btn btn-primary btn-block">Fund Card</a>
+                <a href="<?php echo base_url(); ?>fund-card" class="btn btn-primary btn-block">Get Card</a>
             </div>
         </div>
         <!-- <div class="row">
@@ -415,81 +396,6 @@
             <div class="col-md-8">
                 <!-- /.box -->
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="box box-default">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Revenue Flow</h3>
-                                <div class="box-tools pull-right">
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                            class="fa fa-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i
-                                            class="fa fa-times"></i></button>
-                                </div>
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <?php
-                                $roi = $this->Util_model->sum_field("user_bonus", "amount", "WHERE creditor=" . $this->session->userdata(UID) . " AND status>0 AND type='ROI'");
-                                $referral = $this->Util_model->sum_field("user_bonus", "amount", "WHERE creditor=" . $this->session->userdata(UID) . " AND status>0 AND type='Referral'");
-                                //$group = $this->Util_model->sum_field("user_bonus", "amount", "WHERE creditor=".$this->session->userdata(UID)." AND status>0 AND type='Group'");
-                                $reinvest = $this->Util_model->sum_field("user_bonus", "amount", "WHERE creditor=" . $this->session->userdata(UID) . " AND status>0 AND type='Reinvest'");
-                                //$coordinator = $this->Util_model->sum_field("user_bonus", "amount", "WHERE creditor=".$this->session->userdata(UID)." AND status>0 AND type='Coordinator'");
-
-                                $total = $roi + $referral + $roi + $reinvest;
-                                $roi_per = ($total > 0) ? round(($roi / $total) * 100) : 0;
-                                $referral_per = ($total > 0) ? round(($referral / $total) * 100) : 0;
-                                //$group_per = ($total > 0) ? round(($group/$total) * 100) : 0;
-                                $reinvest_per = ($total > 0) ? round(($reinvest / $total) * 100) : 0;
-                                //$coordinator_per = ($total > 0) ? round(($coordinator/$total) * 100) : 0;
-                                ?>
-                                <div class="row">
-                                    <div class="col-md-9 col-sm-9 col-xs-7">
-                                        <div class="chart-responsive">
-                                            <canvas id="pieChart" height="150"></canvas>
-                                        </div>
-                                        <!-- ./chart-responsive -->
-                                    </div>
-                                    <!-- /.col -->
-                                    <div class="col-md-3 col-sm-3 col-xs-5">
-                                        <ul class="chart-legend clearfix" style="height: 150px;">
-                                            <li><i class="fa fa-circle-o text-aqua"></i> <?php echo $roi_per; ?>%</li>
-                                            <li><i class="fa fa-circle-o text-red"></i> <?php echo $referral_per; ?>%
-                                            </li>
-                                            <!-- <li><i class="fa fa-circle-o text-green"></i> <?php echo $group_per; ?>%</li> -->
-                                            <li><i class="fa fa-circle-o text-yellow"></i> <?php echo $reinvest_per; ?>%
-                                            </li>
-                                            <!-- <li><i class="fa fa-circle-o text-primary"></i> <?php echo $coordinator_per; ?>%</li> -->
-                                        </ul>
-                                    </div>
-                                    <!-- /.col -->
-                                </div>
-                                <!-- /.row -->
-                            </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer no-padding">
-                                <ul class="nav nav-pills nav-stacked">
-                                    <li><a href="javascript:;"><i class="fa fa-circle-o text-aqua"></i> Return on
-                                            Investment (ROI) <span
-                                                class="pull-right text-aqua"><?php echo USD . number_format($roi, 2); ?></span></a>
-                                    </li>
-                                    <li><a href="javascript:;"><i class="fa fa-circle-o text-red"></i> Referral bonus
-                                            <span
-                                                class="pull-right text-red"><?php echo USD . number_format($referral, 2); ?></span></a>
-                                    </li>
-                                    <!-- <li><a href="javascript:;"><i class="fa fa-circle-o text-green"></i> Cell bonus <span class="pull-right text-green"><?php echo USD . number_format($group, 2); ?></span></a></li> -->
-                                    <li><a href="javascript:;"><i class="fa fa-circle-o text-yellow"></i> Reinvest bonus
-                                            <span
-                                                class="pull-right text-yellow"><?php echo USD . number_format($reinvest, 2); ?></span></a>
-                                    </li>
-                                    <!-- <li><a href="javascript:;"><i class="fa fa-circle-o text-primary"></i> Coordinator bonus <span class="pull-right text-primary"><?php echo USD . number_format($coordinator, 2); ?></span></a></li> -->
-                                </ul>
-                            </div>
-                            <!-- /.footer -->
-                        </div>
-                        <!-- /.box -->
-                    </div>
-                    <!-- /.col -->
 
                     <div class="col-md-6">
                         <!-- Info Boxes Style 2 -->
@@ -639,125 +545,6 @@
                 <!-- /.row -->
             </div>
             <!-- /.col -->
-
-            <div class="col-md-4 col-sm-12 col-xs-12">
-                <!-- RECENT TRANSACTION LIST -->
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Recent Withdrawal Transactions</h3>
-
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                    class="fa fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
-                                    class="fa fa-times"></i></button>
-                        </div>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <?php
-                        $s = $this->Db_model->selectGroup("*", "user_wallet", "WHERE status=1 AND creditor=0 ORDER BY id DESC LIMIT 5");
-                        if ($s->num_rows() == 0) {
-                            echo "<div class='well'>No transaction found</div>";
-                        } else {
-                            echo "
-                                <div direction='up' behaviour='scroll' scrollamount='5' onmouseover='stop()' onmouseout='start()' height='350' width='100%'>
-                                    <ul class='products-list product-list-in-box'>
-                                    ";
-                            foreach ($s->result_array() as $row) {
-                                $uid = $row['debitor'];
-                                $desc = $row['desc'];
-                                $label = ($row['type'] == 'credit') ? "success" : "danger";
-                                $picture = $this->Util_model->picture($uid);
-                                $username = $this->Util_model->get_user_info($uid, "username", "profile");
-                                $amount = number_format($row['amount']);
-                                echo "
-                                        <li class='item'>
-                                            <div class='product-img'>
-                                                <img src='$picture' alt='$username'>
-                                            </div>
-                                            <div class='product-info'>
-                                                <a href='javascript:void(0)' class='product-title'>$username
-                                                    <span class='label label-$label pull-right'><i class='fa fa-dollar'></i>$amount</span></a>
-                                                <span class='product-description'>
-                                                    $desc
-                                                </span>
-                                            </div>
-                                        </li>
-                                        <!-- /.item -->
-                                        ";
-                            }
-                            echo "
-                                    </ul>
-                                </div>
-                                ";
-                        }
-                        ?>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-            </div>
-
-
-            <div class="col-md-4 col-sm-12 col-xs-12">
-                <!-- RECENT TRANSACTION LIST -->
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Recent Deposit Transactions</h3>
-
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                    class="fa fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
-                                    class="fa fa-times"></i></button>
-                        </div>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <?php
-                        $s = $this->Db_model->selectGroup("*", "user_wallet", "WHERE status=1 AND debitor=0 ORDER BY id DESC LIMIT 5");
-                        if ($s->num_rows() == 0) {
-                            echo "<div class='well'>No transaction found</div>";
-                        } else {
-                            echo "
-                                <div direction='up' behaviour='scroll' scrollamount='5' onmouseover='stop()' onmouseout='start()' height='350' width='100%'>
-                                    <ul class='products-list product-list-in-box'>
-                                    ";
-                            foreach ($s->result_array() as $row) {
-                                $uid = $row['creditor'];
-                                $desc = $row['desc'];
-                                $label = "success";
-                                $picture = $this->Util_model->picture($uid);
-                                $username = $this->Util_model->get_user_info($uid, "username", "profile");
-                                $amount = number_format($row['amount']);
-                                echo "
-                                        <li class='item'>
-                                            <div class='product-img'>
-                                                <img src='$picture' alt='$username'>
-                                            </div>
-                                            <div class='product-info'>
-                                                <a href='javascript:void(0)' class='product-title'>$username
-                                                    <span class='label label-$label pull-right'><i class='fa fa-dollar'></i>$amount</span></a>
-                                                <span class='product-description'>
-                                                    $desc
-                                                </span>
-                                            </div>
-                                        </li>
-                                        <!-- /.item -->
-                                        ";
-                            }
-                            echo "
-                                    </ul>
-                                </div>
-                                ";
-                        }
-                        ?>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-            </div>
         </div>
         <!-- /.row -->
     </section>

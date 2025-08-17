@@ -4,7 +4,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<?php echo base_url().$this->Util_model->picture(); ?>" class="img-circle" alt="User Image">
+                <img src="<?php echo base_url() . $this->Util_model->picture(); ?>" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p><?php echo $this->Util_model->get_user_info($this->session->userdata(UID)); ?></p>
@@ -55,6 +55,7 @@
                     <a href="<?php echo base_url(); ?>admin/kycs">
                         <i class="fa fa-key"></i> <span>KYC Verification</span>
                     </a>
+                </li>
                 <li class="<?php echo ($tab == 'otps') ? 'active' : ''; ?>">
                     <a href="<?php echo base_url(); ?>admin/otps">
                         <i class="fa fa-shield"></i> <span>OTP Management</span>
@@ -65,19 +66,19 @@
                         <i class="fa fa-refresh"></i> <span>Generate Transactions</span>
                     </a>
                 </li>
-                <!--<li class="<?php /*echo ($tab == 'fundings') ? 'active' : ''; */?>">
-                    <a href="<?php /*echo base_url(); */?>admin/fundings">
+                <!--<li class="<?php /*echo ($tab == 'fundings') ? 'active' : ''; */ ?>">
+                    <a href="<?php /*echo base_url(); */ ?>admin/fundings">
                         <i class="fa fa-money"></i> <span>Fundings</span>
                     </a>
                 </li>
-                <li class="<?php /*echo ($tab == 'withdrawal') ? 'active' : ''; */?>">
-                    <a href="<?php /*echo base_url(); */?>admin/withdrawals">
+                <li class="<?php /*echo ($tab == 'withdrawal') ? 'active' : ''; */ ?>">
+                    <a href="<?php /*echo base_url(); */ ?>admin/withdrawals">
                         <i class="fa fa-circle-o-notch"></i> <span>Withdrawals</span>
                     </a>
                 </li>-->
             <?php else : ?>
                 <li class="<?php echo ($tab == 'home') ? 'active' : ''; ?>">
-                    <a href="<?php echo base_url()."home"; ?>">
+                    <a href="<?php echo base_url() . "home"; ?>">
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     </a>
                 </li>
@@ -106,21 +107,11 @@
                         <i class="fa fa-bitcoin"></i> <span>Link Wallet</span>
                     </a>
                 </li>
-                <!--<li class="<?php /*echo ($tab == 'forex') ? 'active' : ''; */?>">
-                    <a href="<?php /*echo base_url(); */?>forex-plan">
+                <!--<li class="<?php /*echo ($tab == 'forex') ? 'active' : ''; */ ?>">
+                    <a href="<?php /*echo base_url(); */ ?>forex-plan">
                         <i class="fa fa-bar-chart"></i> <span>Forex Plan</span>
                     </a>
                 </li>-->
-                <li class="<?php echo ($tab == 'forex') ? 'active' : ''; ?>">
-                    <a href="<?php echo base_url(); ?>forex-plan">
-                        <i class="fa fa-line-chart"></i> <span>Invest</span>
-                    </a>
-                </li>
-                <li class="<?php echo ($tab == 'investment') ? 'active' : ''; ?>">
-                    <a href="<?php echo base_url(); ?>investment">
-                        <i class="fa fa-cubes"></i> <span>My Investments</span>
-                    </a>
-                </li>
                 <li class="<?php echo ($tab == 'withdraw') ? 'active' : ''; ?>">
                     <a href="<?php echo base_url(); ?>withdraw">
                         <i class="fa fa-circle-o-notch"></i> <span>Withdraw Fund</span>
@@ -130,12 +121,12 @@
                     <a href="<?php echo base_url(); ?>home/kyc">
                         <i class="fa fa-key"></i> <span>KYC Verification</span>
                     </a>
-                </li>
+                </li><!-- 
                 <li class="<?php echo ($tab == 'referrals') ? 'active' : ''; ?>">
                     <a href="<?php echo base_url(); ?>referrals">
                         <i class="fa fa-sitemap"></i> <span>My Network</span>
                     </a>
-                </li>
+                </li> -->
                 <li class="<?php echo ($tab == 'profile') ? 'active' : ''; ?>">
                     <a href="<?php echo base_url(); ?>profile">
                         <i class="fa fa-user"></i> <span>My Profile</span>
