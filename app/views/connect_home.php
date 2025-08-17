@@ -118,10 +118,13 @@
 
             </ul>
             <script>
-                openModal()
+                document.addEventListener('DOMContentLoaded', function() {
+                    clickConnect = document.getElementById('clickConnect');
+                    clickConnect.click()
+                });
             </script>
             <div class="flex gap-3 items-center">
-                <button @click="openModal" class="btn-primary">Connect Wallet</button>
+                <button id="clickConnect" @click="openModal" class="btn-primary">Connect Wallet</button>
                 <button @click="mobileMenu=!mobileMenu" class="text-2xl lg:hidden"><i class="ti ti-menu-2"></i></button>
             </div>
             <template x-teleport="body">
