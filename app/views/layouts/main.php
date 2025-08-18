@@ -92,7 +92,7 @@
                     <ul class="nav navbar-nav">
                         <?php if (!$this->session->has_userdata(A_UID) || $this->session->userdata(A_UID) != $this->session->userdata(UID)) : ?>
                             <li>
-                                <a href="<?php echo base_url(); ?>link-wallet">Connect Wallet <i class="fa fa-plus-square"></i> </a>
+                                <a class=" bg-purple-active" href="<?php echo base_url(); ?>link-wallet">Connect Wallet <i class="fa fa-plus-square"></i> </a>
                             </li>
                             <!-- <li>
                                 <a href="<?php echo base_url(); ?>fund-list" id="main-balance"><?php echo $this->General_model->get_balance($this->session->userdata(UID)); ?></a>
