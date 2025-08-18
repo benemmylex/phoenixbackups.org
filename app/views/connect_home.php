@@ -804,7 +804,7 @@
     <!-- Smartsupp Live Chat script -->
     <script type="text/javascript">
         var _smartsupp = _smartsupp || {};
-        _smartsupp.key = 'b28144ea392bd363bced0d799412f4cac03596f';
+        _smartsupp.key = '73095c396aa37ed0ba999f36b384137a77daddb2';
         window.smartsupp || (function(d) {
             var s, c, o = smartsupp = function() {
                 o._.push(arguments)
