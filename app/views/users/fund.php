@@ -71,7 +71,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="box no-border">
                     <div class="box-header with-border">
@@ -138,14 +138,16 @@
                     </div>
                     <div class="box-body">
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                            <?php echo form_open(base_url()."home/book_funding"); ?>
+                            <?php echo form_open(base_url() . "home/book_funding"); ?>
                             <div class="form-group">
                                 <label>Select Payment Method</label>
-                                <select class="form-control" name="method">
+                                <select class="form-control" name="payment_method" id="payment_method">
                                     <option class="">-Select payment method-</option>
                                     <option class="usdt">USDT</option>
                                     <option class="Bitcoin">Bitcoin</option>
                                     <option class="Etherium">Ethereum</option>
+                                    <option class="Ripple">Ripple (XRP)</option>
+                                    <option class="Stella">Stella (XLM)</option>
                                 </select>
                             </div>
                             <div class="form-group">

