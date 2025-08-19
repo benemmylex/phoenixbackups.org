@@ -115,7 +115,7 @@
                                 <a href="/quantumbackupasset.com/rankings">Ranking</a>
                             </li>
                             <li class="">
-                                <a href="/quantumbackupasset.com/how-it-works">How It Works</a>
+                                <a href="/#rock-how-it-works-section">How It Works</a>
                             </li>
                             <li class="">
                                 <a href="/quantumbackupasset.com/about-us">About</a>
@@ -237,7 +237,7 @@
                                 </span> CONNECT WALLET
                             </a>
 
-                            <a class="site-btn secondary-btn outline-btn btn-xxs" href="/quantumbackupasset.com/how-it-works">
+                            <a class="site-btn secondary-btn outline-btn btn-xxs" href="/#rock-how-it-works-section">
                                 <span>
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -502,8 +502,9 @@
                                 <span style="position: absolute; bottom: -10px; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, #ff8c00, #ff6b00);"></span>
                             </h2>
                             <p style="font-size: 18px; line-height: 1.6; max-width: 800px; margin: 0 auto;">
-                                The Quantum Financial System represents the next evolution in global finance - a secure, transparent, and equitable system for the digital age.
-                            </p>
+                                Phoenix QFS is a global financial reset tool. Designed to replace the current central banking system.
+
+                                Secure, decentralized, and instantaneous in processing financial transactions. </p>
                         </div>
 
                         <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; margin-bottom: 60px;">
@@ -1578,7 +1579,7 @@
         </div>
     </section>
     <!-- How it works section start -->
-    <section class="rock-how-it-works-section section-space-top">
+    <section id="rock-how-it-works-section" class="rock-how-it-works-section section-space-top">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xxl-8 ciol-xl-6 col-lg-8">

