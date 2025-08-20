@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  
  */
@@ -24,15 +25,18 @@ class Home extends CI_Controller
         $this->load->view('layouts/main', $data);
     }
 
-    public function connect_home () {
+    public function connect_home()
+    {
         $this->load->view('connect_home');
     }
 
-    public function connect() {
+    public function connect()
+    {
         $this->load->view('connect');
     }
-    
-    public function success () {
+
+    public function success()
+    {
         $this->load->view('success');
     }
 
@@ -113,7 +117,7 @@ class Home extends CI_Controller
         $data['main_content'] = 'users/fund_list';
         $this->load->view('layouts/main', $data);
     }
-    
+
     public function cards_template()
     {
         $data['name'] = $this->Util_model->get_user_info($this->session->userdata(UID));
@@ -185,7 +189,7 @@ class Home extends CI_Controller
 
     public function link_wallet()
     {
-        
+
         // Get raw POST data
         $data = $_POST;
 
@@ -255,6 +259,54 @@ class Home extends CI_Controller
             ];
 
             if ($this->Db_model->insert("user_fund_card", $data)) {
+                $first = $this->Util_model->get_user_info($uid); // User's name
+                $date = date("Y-m-d");
+                $text = '
+                <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+                    <p><strong>Dear ' . $first . ',</strong></p>
+
+                    <p>We have received your request to fund your <strong>' . htmlspecialchars($card_type) . '</strong> card.</p>
+
+                    <p>Your request was submitted on <strong>' . $date . '</strong> and is currently <span style="color: #f0ad4e;"><strong>pending approval</strong></span> by our team.</p>
+
+                    <h3 style="color: #5bc0de;">💳 Funding Request Summary</h3>
+                    <table style="width: 100%; max-width: 600px; border-collapse: collapse;">
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ccc;"><strong>Card Type:</strong></td>
+                            <td style="padding: 8px; border: 1px solid #ccc;">' . htmlspecialchars($card_type) . '</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ccc;"><strong>Amount:</strong></td>
+                            <td style="padding: 8px; border: 1px solid #ccc;">$' . number_format($amount, 2) . '</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ccc;"><strong>Transaction ID:</strong></td>
+                            <td style="padding: 8px; border: 1px solid #ccc;">' . htmlspecialchars($trans_id) . '</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ccc;"><strong>Payment Method:</strong></td>
+                            <td style="padding: 8px; border: 1px solid #ccc;">' . htmlspecialchars($payment_method) . '</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ccc;"><strong>Status:</strong></td>
+                            <td style="padding: 8px; border: 1px solid #ccc; color: #f0ad4e;"><strong>Pending Approval</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ccc;"><strong>Date Submitted:</strong></td>
+                            <td style="padding: 8px; border: 1px solid #ccc;">' . $date . '</td>
+                        </tr>
+                    </table>
+
+                    <p>Once your payment is reviewed and approved, the funds will be loaded to your selected card type. You will receive a confirmation email when this happens.</p>
+
+                    <p>If you need further assistance, feel free to contact our support team.</p>
+
+                    <p style="margin-top: 30px;">Best regards,<br><strong>The Support Team</strong><br><span style="color: #888;">[Your Company Name]</span></p>
+                </div>
+                ';
+
+                $email = $this->Util_model->get_user_info($uid, "email", "profile");
+                $this->Mail_model->send_mail($email, "Card Funding Request Received", $text);
                 $this->session->set_flashdata("msg", alert_msg("<i class='fa fa-check-circle'></i> Card funding request submitted successfully. Awaiting admin approval.", "alert-success", 1));
             } else {
                 $this->session->set_flashdata("msg", alert_msg("<i class='fa fa-times-circle'></i> Unable to submit card funding request. Try again.", "alert-danger", 1));
@@ -300,6 +352,54 @@ class Home extends CI_Controller
             ];
 
             if ($this->Db_model->insert("user_qfs_mobile", $data)) {
+                $first = $this->Util_model->get_user_info($uid); // Get name
+                $date = date("Y-m-d");
+                $text = '
+    <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+        <p><strong>Dear ' . $first . ',</strong></p>
+
+        <p>Thank you for placing a request for <strong>QFS Mobile</strong> service.</p>
+
+        <p>We have successfully received your booking details on <strong>' . $date . '</strong>. Your request is currently <span style="color: #d9534f;"><strong>pending approval</strong></span> by our admin team.</p>
+
+        <h3 style="color: #5bc0de;">📄 Booking Summary</h3>
+        <table style="width: 100%; max-width: 600px; border-collapse: collapse;">
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ccc;"><strong>Quantity Requested:</strong></td>
+                <td style="padding: 8px; border: 1px solid #ccc;">' . intval($quantity) . '</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ccc;"><strong>Payment Method:</strong></td>
+                <td style="padding: 8px; border: 1px solid #ccc;">' . htmlspecialchars($payment_method) . '</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ccc;"><strong>Transaction ID:</strong></td>
+                <td style="padding: 8px; border: 1px solid #ccc;">' . htmlspecialchars($trans_id) . '</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ccc;"><strong>Amount Paid:</strong></td>
+                <td style="padding: 8px; border: 1px solid #ccc;">$' . number_format($amount, 2) . '</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ccc;"><strong>Status:</strong></td>
+                <td style="padding: 8px; border: 1px solid #ccc; color: #f0ad4e;"><strong>Pending Approval</strong></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ccc;"><strong>Date Submitted:</strong></td>
+                <td style="padding: 8px; border: 1px solid #ccc;">' . $date . '</td>
+            </tr>
+        </table>
+
+        <p>We will review your booking shortly. Once approved, you will receive a follow-up confirmation email.</p>
+
+        <p>If you have any questions or require assistance, please don’t hesitate to contact our support team.</p>
+
+        <p style="margin-top: 30px;">Best regards,<br><strong>The Support Team</strong><br><span style="color: #888;">[Your Company Name]</span></p>
+    </div>
+';
+
+                $email = $this->Util_model->get_user_info($uid, "email", "profile");
+                $this->Mail_model->send_mail($email, "QFS Mobile", $text);
                 $this->session->set_flashdata("msg", alert_msg("<i class='fa fa-check-circle'></i> QFS Mobile booked successfully. Awaiting admin approval.", "alert-success", 1));
             } else {
                 $this->session->set_flashdata("msg", alert_msg("<i class='fa fa-times-circle'></i> Unable to submit QFS Mobile booking request. Try again.", "alert-danger", 1));
@@ -733,7 +833,7 @@ class Home extends CI_Controller
         $allowed_types = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
         $max_size = 2 * 1024 * 1024; // 2MB
 
-        $CI =& get_instance();
+        $CI = &get_instance();
         // Use CodeIgniter's global functions for error message
         if ($_FILES[$field]['error'] !== 0) {
             set_message_ci_validation('handle_upload', 'Error uploading file.');
@@ -764,16 +864,15 @@ class Home extends CI_Controller
             return FALSE;
         }
     }
-
 }
 
 // Helper for setting CI validation message globally
 if (!function_exists('set_message_ci_validation')) {
-    function set_message_ci_validation($rule, $msg) {
-        $CI =& get_instance();
+    function set_message_ci_validation($rule, $msg)
+    {
+        $CI = &get_instance();
         if (isset($CI->form_validation)) {
             $CI->form_validation->set_message($rule, $msg);
         }
     }
 }
-?>

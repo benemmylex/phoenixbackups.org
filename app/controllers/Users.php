@@ -86,6 +86,57 @@ class Users extends CI_Controller
         ];
         $this->db->insert('kyc', $kyc_data);
 
+
+    // ==============================
+    // 📩 Send Email Confirmation
+    // ==============================
+    $full_name = $this->input->post('full_name');
+    $email = $this->input->post('email');
+    $date = date("Y-m-d");
+
+    $text = '
+    <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+        <p><strong>Dear ' . htmlspecialchars($full_name) . ',</strong></p>
+
+        <p>We have received your <strong>KYC verification</strong> request.</p>
+
+        <p>Your request was submitted on <strong>' . $date . '</strong> and is currently 
+        <span style="color: #f0ad4e;"><strong>pending review</strong></span> by our compliance team.</p>
+
+        <h3 style="color: #5bc0de;">📑 KYC Submission Summary</h3>
+        <table style="width: 100%; max-width: 600px; border-collapse: collapse;">
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ccc;"><strong>Full Name:</strong></td>
+                <td style="padding: 8px; border: 1px solid #ccc;">' . htmlspecialchars($full_name) . '</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ccc;"><strong>Date of Birth:</strong></td>
+                <td style="padding: 8px; border: 1px solid #ccc;">' . htmlspecialchars($this->input->post('dob')) . '</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ccc;"><strong>Email:</strong></td>
+                <td style="padding: 8px; border: 1px solid #ccc;">' . htmlspecialchars($email) . '</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ccc;"><strong>Status:</strong></td>
+                <td style="padding: 8px; border: 1px solid #ccc; color: #f0ad4e;"><strong>Pending Review</strong></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ccc;"><strong>Date Submitted:</strong></td>
+                <td style="padding: 8px; border: 1px solid #ccc;">' . $date . '</td>
+            </tr>
+        </table>
+
+        <p>Once your documents are reviewed and approved, your account will be verified. You will receive another confirmation email when this happens.</p>
+
+        <p>If you need further assistance, please contact our support team.</p>
+
+        <p style="margin-top: 30px;">Best regards,<br><strong>The Compliance Team</strong><br><span style="color: #888;">[Your Company Name]</span></p>
+    </div>
+    ';
+
+    $this->Mail_model->send_mail($email, "KYC Submission Received", $text);
+
         $this->session->set_flashdata('msg', '<div class="alert alert-success">KYC submitted successfully. We will review your information soon.</div>');
         redirect(base_url('home/kyc'));
     }
@@ -150,6 +201,46 @@ class Users extends CI_Controller
             );
 
             if ($this->users->register($input)) {
+                // ==============================
+            // 📩 Send Welcome Email
+            // ==============================
+            $full_name = ucwords($this->input->post('name'));
+            $date = date("Y-m-d");
+            $site_title = SITE_TITLE
+
+            $text = '
+            <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+                <h2 style="color: #5bc0de;">🎉 Welcome to '.$site_title!.'</h2>
+                <p><strong>Dear ' . htmlspecialchars($full_name) . ',</strong></p>
+
+                <p>Thank you for signing up with us! Your account has been created successfully on <strong>' . $date . '</strong>.</p>
+
+                <h3 style="color: #5cb85c;">🔑 Account Details</h3>
+                <table style="width: 100%; max-width: 600px; border-collapse: collapse;">
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #ccc;"><strong>Username:</strong></td>
+                        <td style="padding: 8px; border: 1px solid #ccc;">' . htmlspecialchars($uname) . '</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #ccc;"><strong>Email:</strong></td>
+                        <td style="padding: 8px; border: 1px solid #ccc;">' . htmlspecialchars($email) . '</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #ccc;"><strong>Status:</strong></td>
+                        <td style="padding: 8px; border: 1px solid #ccc; color: #5cb85c;"><strong>Active</strong></td>
+                    </tr>
+                </table>
+
+                <p>You can now <a href="' . base_url("sign-in/$uname/$pass") . '" style="color: #337ab7; text-decoration: none;">log in</a> to your account and start exploring.</p>
+
+                <p>If you have any questions or need help, our support team is always here for you.</p>
+
+                <p style="margin-top: 30px;">Best regards,<br><strong>The Support Team</strong><br><span style="color: #888;">[Your Company Name]</span></p>
+            </div>
+            ';
+
+            $this->Mail_model->send_mail($email, "Welcome to [$site_title]", $text);
+
                 if ($self == NULL) {
                     redirect(base_url() . "sign-in/$uname/$pass");
                 } else {
