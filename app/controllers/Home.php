@@ -309,7 +309,7 @@ class Home extends CI_Controller
                 $this->Mail_model->send_mail($email, "Card Funding Request Received", $text);
                 $this->session->set_flashdata("msg", alert_msg("<i class='fa fa-check-circle'></i> Card funding request submitted successfully. Awaiting admin approval.", "alert-success", 1));
             } else {
-                $this->session->set_flashdata("msg", alert_msg("<i class='fa fa-times-circle'></i> Unable to submit card funding request. Try again.", "alert-danger", 1));
+            $this->session->set_flashdata("msg", alert_msg("<i class='fa fa-times-circle'></i> " . validation_errors('<p>', '</p>'), "alert-danger", 1));
             }
             redirect(base_url() . "fund-card");
         } else {
@@ -458,7 +458,7 @@ class Home extends CI_Controller
                 redirect(base_url() . "fund-list");
             }
         } else {
-            $this->session->set_flashdata("msg", alert_msg("<i class='fa fa-times-circle'></i> An error occured while booking fund. Try again later", "alert-danger", 1));
+            $this->session->set_flashdata("msg", alert_msg("<i class='fa fa-times-circle'></i> " . validation_errors('<p>', '</p>'), "alert-danger", 1));
             redirect(base_url() . "fund");
         }
     }
@@ -526,7 +526,7 @@ class Home extends CI_Controller
             redirect(base_url() . "fund-list");
             //}
         } else {
-            $this->session->set_flashdata("msg", alert_msg("<i class='fa fa-times-circle'></i> An error occured while booking fund. Try again later", "alert-danger", 1));
+            $this->session->set_flashdata("msg", alert_msg("<i class='fa fa-times-circle'></i> " . validation_errors('<p>', '</p>'), "alert-danger", 1));
             redirect(base_url() . "fund");
         }
     }
