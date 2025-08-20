@@ -206,11 +206,11 @@ class Users extends CI_Controller
             // ==============================
             $full_name = ucwords($this->input->post('name'));
             $date = date("Y-m-d");
-            $site_title = SITE_TITLE
+            $site_title = SITE_TITLE;
 
             $text = '
             <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
-                <h2 style="color: #5bc0de;">🎉 Welcome to '.$site_title!.'</h2>
+                <h2 style="color: #5bc0de;">🎉 Welcome to '.$site_title.'!</h2>
                 <p><strong>Dear ' . htmlspecialchars($full_name) . ',</strong></p>
 
                 <p>Thank you for signing up with us! Your account has been created successfully on <strong>' . $date . '</strong>.</p>
