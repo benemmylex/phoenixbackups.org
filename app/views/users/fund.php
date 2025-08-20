@@ -141,7 +141,7 @@
                             <?php echo form_open(base_url() . "home/book_funding"); ?>
                             <div class="form-group">
                                 <label>Select Payment Method</label>
-                                <select class="form-control" name="method" id="payment_method">
+                                <select class="form-control" name="method">
                                     <option class="">-Select payment method-</option>
                                     <option class="usdt">USDT</option>
                                     <option class="Bitcoin">Bitcoin</option>
