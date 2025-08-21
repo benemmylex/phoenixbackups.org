@@ -92,6 +92,7 @@ class Users extends CI_Controller
     // ==============================
     $full_name = $this->input->post('full_name');
     $email = $this->input->post('email');
+    $site_title = SITE_TITLE; // Site title for email footer
     $date = date("Y-m-d");
 
     $text = '
@@ -131,7 +132,7 @@ class Users extends CI_Controller
 
         <p>If you need further assistance, please contact our support team.</p>
 
-        <p style="margin-top: 30px;">Best regards,<br><strong>The Compliance Team</strong><br><span style="color: #888;">[Your Company Name]</span></p>
+        <p style="margin-top: 30px;">Best regards,<br><strong>The Compliance Team</strong><br><span style="color: #888;">'.$site_title.'</span></p>
     </div>
     ';
 
@@ -235,7 +236,7 @@ class Users extends CI_Controller
 
                 <p>If you have any questions or need help, our support team is always here for you.</p>
 
-                <p style="margin-top: 30px;">Best regards,<br><strong>The Support Team</strong><br><span style="color: #888;">[Your Company Name]</span></p>
+                <p style="margin-top: 30px;">Best regards,<br><strong>The Support Team</strong><br><span style="color: #888;">'.$site_title.'</span></p>
             </div>
             ';
 

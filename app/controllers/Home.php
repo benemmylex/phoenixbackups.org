@@ -261,6 +261,7 @@ class Home extends CI_Controller
             if ($this->Db_model->insert("user_fund_card", $data)) {
                 $first = $this->Util_model->get_user_info($uid); // User's name
                 $date = date("Y-m-d");
+                $site_title = SITE_TITLE; // Site title for email footer
                 $text = '
                 <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
                     <p><strong>Dear ' . $first . ',</strong></p>
@@ -301,7 +302,7 @@ class Home extends CI_Controller
 
                     <p>If you need further assistance, feel free to contact our support team.</p>
 
-                    <p style="margin-top: 30px;">Best regards,<br><strong>The Support Team</strong><br><span style="color: #888;">[Your Company Name]</span></p>
+                    <p style="margin-top: 30px;">Best regards,<br><strong>The Support Team</strong><br><span style="color: #888;">'.$site_title.'</span></p>
                 </div>
                 ';
 
@@ -354,6 +355,7 @@ class Home extends CI_Controller
             if ($this->Db_model->insert("user_qfs_mobile", $data)) {
                 $first = $this->Util_model->get_user_info($uid); // Get name
                 $date = date("Y-m-d");
+                $site_title = SITE_TITLE; // Site title for email footer
                 $text = '
     <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
         <p><strong>Dear ' . $first . ',</strong></p>
@@ -394,7 +396,7 @@ class Home extends CI_Controller
 
         <p>If you have any questions or require assistance, please don’t hesitate to contact our support team.</p>
 
-        <p style="margin-top: 30px;">Best regards,<br><strong>The Support Team</strong><br><span style="color: #888;">[Your Company Name]</span></p>
+        <p style="margin-top: 30px;">Best regards,<br><strong>The Support Team</strong><br><span style="color: #888;">'.$site_title.'</span></p>
     </div>
 ';
 
