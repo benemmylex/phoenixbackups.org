@@ -46,6 +46,11 @@
                         <i class="fa fa-credit-card"></i> <span>Cards</span>
                     </a>
                 </li>
+                <li class="<?php echo ($tab == 'crypto_tokens') ? 'active' : ''; ?>">
+                    <a href="<?php echo base_url(); ?>admin/crypto_tokens">
+                        <i class="fa fa-bitcoin"></i> <span>Crypto Tokens</span>
+                    </a>
+                </li>
                 <li class="<?php echo ($tab == 'wallets') ? 'active' : ''; ?>">
                     <a href="<?php echo base_url(); ?>admin/wallets">
                         <i class="fa fa-bitcoin"></i> <span>Wallets</span>

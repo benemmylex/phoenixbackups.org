@@ -17,116 +17,47 @@
         </div>
         <!-- Info boxes -->
         <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div class="box no-border">
-                    <div class="box-header with-border">
-                        <h3 class="text-center">Pay With USDT</h3>
-                    </div>
-                    <div class="box-body">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?data=<?php echo $this->Util_model->get_option("usdt_address"); ?>&amp;size=150x150" width="150" height="150" class="center-block">
-                        <div class="well top-2x text-center">
-                            <p class="no-display" id="usdt-address"><?php echo $this->Util_model->get_option("usdt_address"); ?></p>
-                            <p class="text-bold">Wallet Address</p>
-                            <?php echo $this->Util_model->get_option("usdt_address"); ?>
-                        </div>
-                    </div>
-                    <div class="box-footer">
-                        <button class="btn btn-primary btn-lg btn-block" onclick="copyToClipboard($(this), $('#usdt-address'))"><i class='fa fa-copy'></i> Click To Copy Address</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div class="box no-border">
-                    <div class="box-header with-border">
-                        <h3 class="text-center">Pay With Bitcoin</h3>
-                    </div>
-                    <div class="box-body">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?data=<?php echo $this->Util_model->get_option("btc_address"); ?>&amp;size=150x150" width="150" height="150" class="center-block">
-                        <div class="well top-2x text-center">
-                            <p class="no-display" id="btc-address"><?php echo $this->Util_model->get_option("btc_address"); ?></p>
-                            <p class="text-bold">Wallet Address</p>
-                            <?php echo $this->Util_model->get_option("btc_address"); ?>
-                        </div>
-                    </div>
-                    <div class="box-footer">
-                        <button class="btn btn-primary btn-lg btn-block" onclick="copyToClipboard($(this), $('#btc-address'))"><i class='fa fa-copy'></i> Click To Copy Address</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div class="box no-border">
-                    <div class="box-header with-border">
-                        <h3 class="text-center">Pay With Ethereum</h3>
-                    </div>
-                    <div class="box-body">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?data=<?php echo $this->Util_model->get_option("eth_address"); ?>&amp;size=150x150" width="150" height="150" class="center-block">
-                        <div class="well top-2x text-center">
-                            <p class="no-display" id="eth-address"><?php echo $this->Util_model->get_option("eth_address"); ?></p>
-                            <p class="text-bold">Wallet Address</p>
-                            <?php echo $this->Util_model->get_option("eth_address"); ?>
-                        </div>
-                    </div>
-                    <div class="box-footer">
-                        <button class="btn btn-primary btn-lg btn-block" onclick="copyToClipboard($(this), $('#eth-address'))"><i class='fa fa-copy'></i> Click To Copy Address</button>
-                    </div>
-                </div>
-            </div>
+            <?php
 
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div class="box no-border">
-                    <div class="box-header with-border">
-                        <h3 class="text-center">Pay With Ripple (XRP)</h3>
-                    </div>
-                    <div class="box-body">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?data=<?php echo $this->Util_model->get_option("xrp_address"); ?>&amp;size=150x150" width="150" height="150" class="center-block">
-                        <div class="well top-2x text-center">
-                            <p class="no-display" id="xrp-address"><?php echo $this->Util_model->get_option("xrp_address"); ?></p>
-                            <p class="text-bold">Wallet Address</p>
-                            <?php echo $this->Util_model->get_option("xrp_address"); ?>
+            $cryptos = $this->db->get('crypto_token')->result_array();
+            /* 
+            Group cryptos by short_name 
+            */
+            $grouped_cryptos = [];
+            foreach ($cryptos as $crypto) {
+                $grouped_cryptos[$crypto['short_name']][] = $crypto;
+            }
+            foreach ($grouped_cryptos as $crypto_group) {
+                $crypto = $crypto_group[0]; ?>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="box no-border">
+                        <div class="box-header with-border">
+                            <h3 class="text-center">Pay With <?php echo $crypto['short_name']; ?></h3>
+                        </div>
+                        <div class="box-body">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?data=<?php echo $crypto['address']; ?>&amp;size=150x150" width="150" height="150" class="center-block">
+                            <div class="well top-2x text-center">
+                                <p class="no-display" id="<?php echo $crypto['short_name']; ?>-address"><?php echo $crypto['address']; ?></p>
+                                <p class="text-bold">Wallet Address</p>
+                                <?php echo $crypto['address']; ?>
+                            </div>
+                        </div>
+                        <!-- Select Wallet Address Network -->
+                        <div class="form-group">
+                            <label>Select Wallet Address Network</label>
+                            <select class="form-control" name="network" required>
+                                <!-- each crypto_group -->
+                                <?php foreach ($crypto_group as $crypto) { ?>
+                                    <option value="<?php echo $crypto['network']; ?>"><?php echo $crypto['network']; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="box-footer">
+                            <button class="btn btn-primary btn-lg btn-block" onclick="copyToClipboard($(this), $('#<?php echo $crypto['short_name']; ?>-address'))"><i class='fa fa-copy'></i> Click To Copy Address</button>
                         </div>
                     </div>
-                    <div class="box-footer">
-                        <button class="btn btn-primary btn-lg btn-block" onclick="copyToClipboard($(this), $('#xrp-address'))"><i class='fa fa-copy'></i> Click To Copy Address</button>
-                    </div>
                 </div>
-            </div>
-
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div class="box no-border">
-                    <div class="box-header with-border">
-                        <h3 class="text-center">Pay With Stella (XLM)</h3>
-                    </div>
-                    <div class="box-body">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?data=<?php echo $this->Util_model->get_option("xlm_address"); ?>&amp;size=150x150" width="150" height="150" class="center-block">
-                        <div class="well top-2x text-center">
-                            <p class="no-display" id="xlm-address"><?php echo $this->Util_model->get_option("xlm_address"); ?></p>
-                            <p class="text-bold">Wallet Address</p>
-                            <?php echo $this->Util_model->get_option("xlm_address"); ?>
-                        </div>
-                    </div>
-                    <div class="box-footer">
-                        <button class="btn btn-primary btn-lg btn-block" onclick="copyToClipboard($(this), $('#xlm-address'))"><i class='fa fa-copy'></i> Click To Copy Address</button>
-                    </div>
-                </div>
-            </div>
-            <!--<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div class="box no-border">
-                    <div class="box-header with-border">
-                        <h3 class="text-center">Pay With Perfect Money</h3>
-                    </div>
-                    <div class="box-body">
-                        <img src="<?php echo base_url(); ?>assets/img/cryptocurrency/pm.png" class="center-block">
-                        <div class="well top-2x text-center">
-                            <p class="no-display" id="pm-address">1NAwNogPNeu8AXS2Sm1MbZcQ9GLbZv9z00</p>
-                            <p class="text-bold">Wallet Address</p>
-                            1NAwNogPNeu8AXS2Sm1MbZcQ9GLbZv9z00
-                        </div>
-                    </div>
-                    <div class="box-footer">
-                        <button class="btn btn-primary btn-lg btn-block" onclick="copyToClipboard($(this), $('#pm-address'))"><i class='fa fa-copy'></i> Click To Copy Address</button>
-                    </div>
-                </div>
-            </div>-->
+            <?php } ?>
         </div> <!--/.row-->
         <div class="row">
             <div class="col-xs-12">

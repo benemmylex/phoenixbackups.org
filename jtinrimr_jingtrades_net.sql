@@ -842,6 +842,17 @@ CREATE TABLE `user_otp` (
  KEY `uid` (`uid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
 
+CREATE TABLE `crypto_token` (
+ `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+ `long_name` varchar(10) NOT NULL,
+ `short_name` varchar(10) NOT NULL,
+ `network` varchar(10) NOT NULL,
+ `address` varchar(10) NOT NULL,
+ `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+ PRIMARY KEY (`id`),
+ KEY `short_name` (`short_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+
 --
 -- Indexes for dumped tables
 --

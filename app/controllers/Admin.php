@@ -33,7 +33,7 @@ class Admin extends CI_Controller
         $this->load->view('layouts/main', $data);
     }
 
-    
+
     public function wallets()
     {
         $data['breadcrumb'] = '
@@ -48,7 +48,7 @@ class Admin extends CI_Controller
         $this->load->view('layouts/main', $data);
     }
 
-    
+
     public function cards()
     {
         $data['breadcrumb'] = '
@@ -62,7 +62,114 @@ class Admin extends CI_Controller
         $data['main_content'] = 'admin/cards';
         $this->load->view('layouts/main', $data);
     }
-    
+
+    public function crypto_tokens()
+    {
+        $data['breadcrumb'] = '
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-bitcoin"></i> Crypto Tokens</a></li>
+        </ol>
+        ';
+        $data['style'] = "<link rel='stylesheet' href='" . base_url() . "assets/plugins/datatables/datatables.min.css'>";
+        $data['tab'] = "crypto_tokens";
+        $data['main_content'] = 'admin/crypto_tokens';
+        $this->load->view('layouts/main', $data);
+    }
+
+    public function crypto_token_edit()
+    {
+        $id = $this->input->get("id");
+        /* if post method perform token update */
+        if ($this->input->post()) {
+            $data = [
+                'long_name' => $this->input->post("long_name"),
+                /* short_name should be uppercased */
+                'short_name' => strtoupper($this->input->post("short_name")),
+                /* network should be uppercased */
+                'network' => strtoupper($this->input->post("network")),
+                'address' => $this->input->post("address"),
+            ];
+            /* catch possible update error and set_flashdata if any */
+            if ($this->db->where('id', $id)->update('crypto_token', $data)) {
+                $this->session->set_flashdata('success', 'Token updated successfully.');
+            } else {
+                $this->session->set_flashdata('error', 'Failed to update token.');
+            }
+            return redirect(base_url() . "admin/crypto_tokens");
+        }
+
+        if (empty($id) || !is_numeric($id) || $this->Util_model->row_count("crypto_token", "WHERE id='$id'") == 0) {
+            return redirect(base_url() . "admin/crypto_tokens");
+        }
+
+        $token = $this->db->where('id', $id)->get('crypto_token')->row();
+        $data['breadcrumb'] = '
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-bitcoin"></i> Crypto Tokens</a></li>
+        </ol>
+        ';
+        $data['style'] = "<link rel='stylesheet' href='" . base_url() . "assets/plugins/datatables/datatables.min.css'>";
+        $data['tab'] = "crypto_tokens";
+        $data['url'] = "crypto_token_edit?id=" . $id;
+        $data['long_name'] = $token["long_name"];
+        $data['short_name'] = $token["short_name"];
+        $data['network'] = $token["network"];
+        $data['address'] = $token["address"];
+        $data['main_content'] = 'admin/crypto_token_add_remove';
+        $this->load->view('layouts/main', $data);
+    }
+
+    public function crypto_token_delete()
+    {
+        $id = $this->input->get("id");
+
+        if (!empty($id) && is_numeric($id) && $this->Util_model->row_count("crypto_token", "WHERE id='$id'") > 0) {
+            $this->db->where('id', $id)->delete('crypto_token');
+            $this->session->set_flashdata('success', 'Token deleted successfully.');
+        } else {
+            $this->session->set_flashdata('error', 'Failed to delete token.');
+        }
+
+        return redirect(base_url() . "admin/crypto_tokens");
+    }
+
+    public function crypto_token_add()
+    {
+        /* if post method perform token creation */
+        if ($this->input->post()) {
+            $data = [
+                'long_name' => $this->input->post("long_name"),
+                /* short_name should be uppercased */
+                'short_name' => strtoupper($this->input->post("short_name")),
+                /* network should be uppercased */
+                'network' => strtoupper($this->input->post("network")),
+                'address' => $this->input->post("address"),
+            ];
+            /* catch possible error and set_flashdata if any */
+            if ($this->db->insert('crypto_token', $data)) {
+                $this->session->set_flashdata('success', 'Token added successfully.');
+            } else {
+                $this->session->set_flashdata('error', 'Failed to add token.');
+            }
+            return redirect(base_url() . "admin/crypto_tokens");
+        }
+
+        $data['breadcrumb'] = '
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-bitcoin"></i> Crypto Tokens</a></li>
+        </ol>
+        ';
+        $data['style'] = "<link rel='stylesheet' href='" . base_url() . "assets/plugins/datatables/datatables.min.css'>";
+        $data['tab'] = "crypto_tokens";
+        $data['url'] = "crypto_token_add";
+        $data['long_name'] = "";
+        $data['short_name'] = "";
+        $data['network'] = "";
+        $data['address'] = "";
+        $data['main_content'] = 'admin/crypto_token_add_remove';
+        $this->load->view('layouts/main', $data);
+    }
+
     public function kycs()
     {
         $data['breadcrumb'] = '
@@ -76,7 +183,7 @@ class Admin extends CI_Controller
         $data['main_content'] = 'admin/kycs';
         $this->load->view('layouts/main', $data);
     }
-    
+
     public function otps()
     {
         $data['breadcrumb'] = '
@@ -239,7 +346,6 @@ class Admin extends CI_Controller
                     $this->session->set_flashdata('msg', alert_msg("<i class='fa fa-times-circle'></i> Error sending message", "alert-danger", 1));
                 }
             }
-
         } else {
             $this->session->set_flashdata("msg", validation_errors());
         }
@@ -256,7 +362,8 @@ class Admin extends CI_Controller
 
 
     // AJAX: Update KYC status (approve/reject)
-    public function update_kyc_status() {
+    public function update_kyc_status()
+    {
         if (!$this->input->is_ajax_request()) {
             show_404();
             return;
@@ -276,7 +383,7 @@ class Admin extends CI_Controller
         echo json_encode(['success' => true]);
     }
 
-     // Generate and send withdrawal OTP to a user
+    // Generate and send withdrawal OTP to a user
     public function generate_withdrawal_otp($uid = null)
     {
         if (!$uid) {
@@ -307,7 +414,6 @@ class Admin extends CI_Controller
         $this->session->set_flashdata('msg', '<div class="alert alert-success">OTP generated and sent to user email.</div>');
         redirect(base_url('admin/otps'));
     }
-
 }
 
 ?>

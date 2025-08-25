@@ -24,7 +24,7 @@
                             <div class="form-group">
                                 <label>Referral bonus</label>
                                 <input class="form-control" name="referral_bonus" type="number" value="5">
-                            </div>
+                            </div><!-- 
                             <div class="form-group">
                                 <label>Bitcoin address</label>
                                 <input class="form-control" name="btc_address" type="text" value="<?php echo $this->Util_model->get_option('btc_address'); ?>">
@@ -44,7 +44,7 @@
                             <div class="form-group">
                                 <label>Stella (XLM) address</label>
                                 <input class="form-control" name="xlm_address" type="text" value="<?php echo $this->Util_model->get_option('xlm_address'); ?>">
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <label>Gold Virtual Card Wallet Amount</label>
                                 <input class="form-control" name="gold_card_wallet_amount" type="text" value="<?php echo $this->Util_model->get_option('gold_card_wallet_amount'); ?>">
