@@ -163,6 +163,7 @@
                                 <div class="modal-body">
                                     <div class="row">
                                         <?php
+
                                         $cryptos = $this->db->get('crypto_token')->result_array();
                                         /* 
             Group cryptos by short_name 
@@ -171,25 +172,44 @@
                                         foreach ($cryptos as $crypto) {
                                             $grouped_cryptos[$crypto['short_name']][] = $crypto;
                                         }
+                                        ?>
+                                        <script>
+                                            function updateAddress(selectElement) {
+                                                var selectedNetwork = selectElement.value;
+                                                var cryptoShortName = selectElement.closest('.box').querySelector('h3').innerText.split('(')[1].split(')')[0];
+                                                var cryptoGroup = <?php echo json_encode($grouped_cryptos); ?>;
+                                                var selectedCrypto = cryptoGroup[cryptoShortName].find(c => c.network === selectedNetwork);
+                                                if (selectedCrypto) {
+                                                    document.getElementById(cryptoShortName + '-address').innerText = selectedCrypto.address;
+                                                    document.getElementById(cryptoShortName + '-address-text').innerText = selectedCrypto.address;
+                                                    document.querySelector('.box img').src = "https://api.qrserver.com/v1/create-qr-code/?data=" + selectedCrypto.address + "&size=150x150";
+                                                }
+                                            }
+                                        </script>
+                                        <?php
                                         foreach ($grouped_cryptos as $crypto_group) {
                                             $crypto = $crypto_group[0]; ?>
                                             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                                 <div class="box no-border">
                                                     <div class="box-header with-border">
-                                                        <h3 class="text-center">Pay With <?php echo $crypto['short_name']; ?></h3>
+                                                        <h3 class="text-center">Pay With <?php echo $crypto['long_name']; ?> (<?php echo $crypto['short_name']; ?>)</h3>
                                                     </div>
                                                     <div class="box-body">
                                                         <img src="https://api.qrserver.com/v1/create-qr-code/?data=<?php echo $crypto['address']; ?>&amp;size=150x150" width="150" height="150" class="center-block">
                                                         <div class="well top-2x text-center">
                                                             <p class="no-display" id="<?php echo $crypto['short_name']; ?>-address"><?php echo $crypto['address']; ?></p>
                                                             <p class="text-bold">Wallet Address</p>
-                                                            <?php echo $crypto['address']; ?>
+                                                            <span id="<?php echo $crypto['short_name']; ?>-address-text">
+                                                                <?php echo $crypto['address']; ?>
+                                                            </span>
                                                         </div>
                                                     </div>
                                                     <!-- Select Wallet Address Network -->
                                                     <div class="form-group">
                                                         <label>Select Wallet Address Network</label>
-                                                        <select class="form-control" name="network" required>
+                                                        <!-- on network select should change the address -->
+                                                        <select class="form-control" name="network" required onchange="updateAddress(this)">
+                                                            <option value="">-Select Network-</option>
                                                             <!-- each crypto_group -->
                                                             <?php foreach ($crypto_group as $crypto) { ?>
                                                                 <option value="<?php echo $crypto['network']; ?>"><?php echo $crypto['network']; ?></option>
