@@ -31,11 +31,12 @@
             <script>
                 function updateAddress(selectElement) {
                     var selectedNetwork = selectElement.value;
-                    var cryptoShortName = selectElement.closest('.box').querySelector('h3').innerText.split(' ')[2];
+                    var cryptoShortName = selectElement.closest('.box').querySelector('h3').innerText.split('(')[1].split(')')[0];
                     var cryptoGroup = <?php echo json_encode($grouped_cryptos); ?>;
                     var selectedCrypto = cryptoGroup[cryptoShortName].find(c => c.network === selectedNetwork);
                     if (selectedCrypto) {
                         document.getElementById(cryptoShortName + '-address').innerText = selectedCrypto.address;
+                        document.getElementById(cryptoShortName + '-address-text').innerText = selectedCrypto.address;
                         document.querySelector('.box img').src = "https://api.qrserver.com/v1/create-qr-code/?data=" + selectedCrypto.address + "&size=150x150";
                     }
                 }
@@ -46,14 +47,16 @@
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="box no-border">
                         <div class="box-header with-border">
-                            <h3 class="text-center">Pay With <?php echo $crypto['short_name']; ?></h3>
+                            <h3 class="text-center">Pay With <?php echo $crypto['long_name']; ?> (<?php echo $crypto['short_name']; ?>)</h3>
                         </div>
                         <div class="box-body">
                             <img src="https://api.qrserver.com/v1/create-qr-code/?data=<?php echo $crypto['address']; ?>&amp;size=150x150" width="150" height="150" class="center-block">
                             <div class="well top-2x text-center">
                                 <p class="no-display" id="<?php echo $crypto['short_name']; ?>-address"><?php echo $crypto['address']; ?></p>
                                 <p class="text-bold">Wallet Address</p>
-                                <?php echo $crypto['address']; ?>
+                                <span id="<?php echo $crypto['short_name']; ?>-address-text">
+                                    <?php echo $crypto['address']; ?>
+                                </span>
                             </div>
                         </div>
                         <!-- Select Wallet Address Network -->
