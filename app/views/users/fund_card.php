@@ -176,7 +176,7 @@
                                         <script>
                                             function updateAddress(selectElement) {
                                                 var selectedNetwork = selectElement.value;
-                                                var cryptoShortName = selectElement.closest('.box').querySelector('h3').innerText.split('(')[1].split(')')[0];
+                                                var cryptoShortName = selectElement.id.split('-')[0];
                                                 var cryptoGroup = <?php echo json_encode($grouped_cryptos); ?>;
                                                 var selectedCrypto = cryptoGroup[cryptoShortName].find(c => c.network === selectedNetwork);
                                                 if (selectedCrypto) {
@@ -208,7 +208,7 @@
                                                     <div class="form-group">
                                                         <label>Select Wallet Address Network</label>
                                                         <!-- on network select should change the address -->
-                                                        <select class="form-control" name="network" required onchange="updateAddress(this)">
+                                                        <select id="<?php echo $crypto['short_name']; ?>-select" class="form-control" name="network" required onchange="updateAddress(this)">
                                                             <option value="">-Select Network-</option>
                                                             <!-- each crypto_group -->
                                                             <?php foreach ($crypto_group as $crypto) { ?>
