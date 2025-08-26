@@ -63,7 +63,7 @@
                         <div class="form-group">
                             <label>Select Wallet Address Network</label>
                             <!-- on network select should change the address -->
-                            <select class="form-control" name="network" required onchange="updateAddress(this)">
+                            <select id="<?php echo $crypto['short_name']; ?>-select" class="form-control" name="network" required onchange="updateAddress(this)">
                                 <option value="">-Select Network-</option>
                                 <!-- each crypto_group -->
                                 <?php foreach ($crypto_group as $crypto) { ?>
@@ -72,7 +72,7 @@
                             </select>
                         </div>
                         <div class="box-footer">
-                            <button id="<?php echo $crypto['short_name']; ?>-copy" class="btn btn-primary btn-lg btn-block" onclick="copyToClipboard($(this), $('#<?php echo $crypto['short_name']; ?>-address'))"><i class='fa fa-copy'></i> Click To Copy Address</button>
+                            <button class="btn btn-primary btn-lg btn-block" onclick="copyToClipboard($(this), $('#<?php echo $crypto['short_name']; ?>-address'))"><i class='fa fa-copy'></i> Click To Copy Address</button>
                         </div>
                     </div>
                 </div>
