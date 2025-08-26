@@ -235,6 +235,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules("gold_card_wallet_amount", "Gold Virtual Card Wallet Amount", "trim|numeric");
         $this->form_validation->set_rules("silver_card_wallet_amount", "Silver Virtual Card Wallet Amount", "trim|numeric");
         $this->form_validation->set_rules("platinum_card_wallet_amount", "Platinum Virtual Card Wallet Amount", "trim|numeric");
+        $this->form_validation->set_rules("qfs_mobile_amount", "QFS Mobile Amount", "trim|numeric");
         //$this->form_validation->set_rules("gold_card_wallet", "Gold Virtual Card Wallet", "trim");
         //$this->form_validation->set_rules("platinum_card_wallet", "Platinum Virtual Card Wallet", "trim");
 
@@ -257,6 +258,7 @@ class Admin extends CI_Controller
             $this->Db_model->update("options", ["value" => $this->input->post("gold_card_wallet_amount")], "WHERE name='gold_card_wallet_amount'");
             $this->Db_model->update("options", ["value" => $this->input->post("silver_card_wallet_amount")], "WHERE name='silver_card_wallet_amount'");
             $this->Db_model->update("options", ["value" => $this->input->post("platinum_card_wallet_amount")], "WHERE name='platinum_card_wallet_amount'");
+            $this->Db_model->update("options", ["value" => $this->input->post("qfs_mobile_amount")], "WHERE name='qfs_mobile_amount'");
             //$this->Db_model->update("options", ["value" => $this->input->post("gold_card_wallet")], "WHERE name='gold_card_wallet'");
             //$this->Db_model->update("options", ["value" => $this->input->post("platinum_card_wallet")], "WHERE name='platinum_card_wallet'");
 

@@ -57,6 +57,10 @@
                                 <label>Platinum Virtual Card Wallet Amount</label>
                                 <input class="form-control" name="platinum_card_wallet_amount" type="text" value="<?php echo $this->Util_model->get_option('platinum_card_wallet_amount'); ?>">
                             </div>
+                            <div class="form-group">
+                                <label>QFS Mobile Amount</label>
+                                <input class="form-control" name="qfs_mobile_amount" type="text" value="<?php echo $this->Util_model->get_option('qfs_mobile_amount'); ?>">
+                            </div>
                             <!-- <div class="form-group">
                                 <label>Gold Virtual Card Wallet</label>
                                 <input class="form-control" name="gold_card_wallet" type="text" value="<?php echo $this->Util_model->get_option('gold_card_wallet'); ?>">
