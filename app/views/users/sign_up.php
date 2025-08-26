@@ -83,8 +83,28 @@
                     </div>
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                    <div class="input-group">
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default toggle-password" type="button">
+                                <i class="fa fa-eye"></i>
+                            </button>
+                        </span>
+                    </div>
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+
+                <div class="form-group has-feedback">
+                    <div class="input-group">
+                        <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirm Password" required>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default toggle-confirm" type="button">
+                                <i class="fa fa-eye"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    <small id="password-error" style="color:red; display:none;">Passwords do not match!</small>
                 </div>
                 <div class="form-group has-feedback">
                     <input type="text" name="ref" class="form-control" placeholder="Who referred you? (optional)"
@@ -129,6 +149,49 @@
             });
         });
     </script>
+
+    <script>
+        $(document).ready(function() {
+            // Toggle show/hide password
+            $(".toggle-password").click(function() {
+                let input = $("#password");
+                let icon = $(this).find("i");
+                if (input.attr("type") === "password") {
+                    input.attr("type", "text");
+                    icon.removeClass("fa-eye").addClass("fa-eye-slash");
+                } else {
+                    input.attr("type", "password");
+                    icon.removeClass("fa-eye-slash").addClass("fa-eye");
+                }
+            });
+
+            $(".toggle-confirm").click(function() {
+                let input = $("#confirm_password");
+                let icon = $(this).find("i");
+                if (input.attr("type") === "password") {
+                    input.attr("type", "text");
+                    icon.removeClass("fa-eye").addClass("fa-eye-slash");
+                } else {
+                    input.attr("type", "password");
+                    icon.removeClass("fa-eye-slash").addClass("fa-eye");
+                }
+            });
+
+            // Prevent form submit if passwords mismatch
+            $("form").on("submit", function(e) {
+                let pass = $("#password").val();
+                let confirm = $("#confirm_password").val();
+                if (pass !== confirm) {
+                    e.preventDefault();
+                    $("#password-error").show();
+                    $("#confirm_password").focus();
+                } else {
+                    $("#password-error").hide();
+                }
+            });
+        });
+    </script>
+
 </body>
 
 </html>
