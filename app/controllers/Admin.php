@@ -111,10 +111,10 @@ class Admin extends CI_Controller
         $data['style'] = "<link rel='stylesheet' href='" . base_url() . "assets/plugins/datatables/datatables.min.css'>";
         $data['tab'] = "crypto_tokens";
         $data['url'] = "crypto_token_edit?id=" . $id;
-        $data['long_name'] = $token["long_name"];
-        $data['short_name'] = $token["short_name"];
-        $data['network'] = $token["network"];
-        $data['address'] = $token["address"];
+        $data['long_name'] = $token->long_name;
+        $data['short_name'] = $token->short_name;
+        $data['network'] = $token->network;
+        $data['address'] = $token->address;
         $data['main_content'] = 'admin/crypto_token_add_remove';
         $this->load->view('layouts/main', $data);
     }
