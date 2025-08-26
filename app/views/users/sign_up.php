@@ -91,7 +91,7 @@
                             </button>
                         </span>
                     </div>
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    <!-- <span class="glyphicon glyphicon-lock form-control-feedback"></span> -->
                 </div>
 
                 <div class="form-group has-feedback">
@@ -103,7 +103,7 @@
                             </button>
                         </span>
                     </div>
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    <!-- <span class="glyphicon glyphicon-lock form-control-feedback"></span> -->
                     <small id="password-error" style="color:red; display:none;">Passwords do not match!</small>
                 </div>
                 <div class="form-group has-feedback">
@@ -142,16 +142,7 @@
     <script src="<?php echo base_url(); ?>assets/plugins/iCheck/icheck.min.js"></script>
     <script>
         $(function() {
-            $('input').iCheck({
-                checkboxClass: 'icheckbox_square-blue',
-                radioClass: 'iradio_square-blue',
-                increaseArea: '20%' // optional
-            });
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
+            console.log("Form initialized");
             // Toggle show/hide password
             $(".toggle-password").click(function() {
                 let input = $("#password");
@@ -188,6 +179,11 @@
                 } else {
                     $("#password-error").hide();
                 }
+            });
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
             });
         });
     </script>
