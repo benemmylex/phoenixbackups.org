@@ -350,10 +350,10 @@
                     </div>
                     <div class="col-span-6 md:col-span-3 xl:pl-8">
                         <h3 class="h3 mb-3"><span id="investor">30</span> Million</h3>
-                        <p class="text-neutral1/80 lg:text-lg">Global Investors</p>
+                        <p class="text-neutral1/80 lg:text-lg">Global Subscribers</p>
                     </div>
                     <div class="col-span-6 md:col-span-3 xl:pl-8">
-                        <h3 class="h3 mb-3"><span id="coin">700</span>+</h3>
+                        <h3 class="h3 mb-3"><span id="coin">5</span> Million +</h3>
                         <p class="text-neutral1/80 lg:text-lg">Secured Wallet</p>
                     </div>
                     <div class="col-span-6 md:col-span-3 xl:pl-8">
