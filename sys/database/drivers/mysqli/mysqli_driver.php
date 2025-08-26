@@ -303,7 +303,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 	protected function _execute($sql)
 	{
 		/* Print the sql to log */
-		log_message('debug', 'SQL Query: '.$sql);
+		log_message('error', 'SQL Query: '.$sql);
 		return $this->conn_id->query($this->_prep_query($sql));
 	}
 
