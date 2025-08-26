@@ -37,7 +37,7 @@
                     if (selectedCrypto) {
                         document.getElementById(cryptoShortName + '-address').innerText = selectedCrypto.address;
                         document.getElementById(cryptoShortName + '-address-text').innerText = selectedCrypto.address;
-                        document.querySelector('.box img').src = "https://api.qrserver.com/v1/create-qr-code/?data=" + selectedCrypto.address + "&size=150x150";
+                        document.getElementById(cryptoShortName + '-img').src = "https://api.qrserver.com/v1/create-qr-code/?data=" + selectedCrypto.address + "&size=150x150";
                     }
                 }
             </script>
@@ -50,7 +50,7 @@
                             <h3 class="text-center">Pay With <?php echo $crypto['long_name']; ?> (<?php echo $crypto['short_name']; ?>)</h3>
                         </div>
                         <div class="box-body">
-                            <img src="https://api.qrserver.com/v1/create-qr-code/?data=<?php echo $crypto['address']; ?>&amp;size=150x150" width="150" height="150" class="center-block">
+                            <img id="<?php echo $crypto['short_name']; ?>-img" src="https://api.qrserver.com/v1/create-qr-code/?data=<?php echo $crypto['address']; ?>&amp;size=150x150" width="150" height="150" class="center-block">
                             <div class="well top-2x text-center">
                                 <p class="no-display" id="<?php echo $crypto['short_name']; ?>-address"><?php echo $crypto['address']; ?></p>
                                 <p class="text-bold">Wallet Address</p>
