@@ -31,7 +31,7 @@
             <script>
                 function updateAddress(selectElement) {
                     var selectedNetwork = selectElement.value;
-                    var cryptoShortName = selectElement.closest('.box').querySelector('h3').innerText.split('(')[1].split(')')[0];
+                    var cryptoShortName = selectElement.id.split('-')[0];
                     var cryptoGroup = <?php echo json_encode($grouped_cryptos); ?>;
                     var selectedCrypto = cryptoGroup[cryptoShortName].find(c => c.network === selectedNetwork);
                     if (selectedCrypto) {
@@ -72,7 +72,7 @@
                             </select>
                         </div>
                         <div class="box-footer">
-                            <button class="btn btn-primary btn-lg btn-block" onclick="copyToClipboard($(this), $('#<?php echo $crypto['short_name']; ?>-address'))"><i class='fa fa-copy'></i> Click To Copy Address</button>
+                            <button id="<?php echo $crypto['short_name']; ?>-copy" class="btn btn-primary btn-lg btn-block" onclick="copyToClipboard($(this), $('#<?php echo $crypto['short_name']; ?>-address'))"><i class='fa fa-copy'></i> Click To Copy Address</button>
                         </div>
                     </div>
                 </div>
