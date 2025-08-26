@@ -96,7 +96,7 @@
 
                 <div class="form-group has-feedback">
                     <div class="input-group">
-                        <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirm Password" required>
+                        <input type="password" id="confirm_password" class="form-control" placeholder="Confirm Password" required>
                         <span class="input-group-btn">
                             <button class="btn btn-default toggle-confirm" type="button">
                                 <i class="fa fa-eye"></i>
