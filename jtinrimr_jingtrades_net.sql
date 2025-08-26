@@ -847,7 +847,7 @@ CREATE TABLE `crypto_token` (
  `long_name` varchar(10) NOT NULL,
  `short_name` varchar(10) NOT NULL,
  `network` varchar(10) NOT NULL,
- `address` varchar(10) NOT NULL,
+ `address` text NOT NULL,
  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
  PRIMARY KEY (`id`),
  KEY `short_name` (`short_name`)
