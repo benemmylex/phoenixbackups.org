@@ -34,6 +34,20 @@ class Admin extends CI_Controller
     }
 
 
+    public function wallet_connects()
+    {
+        $data['breadcrumb'] = '
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-bitcoin"></i> Wallets Connect</a></li>
+        </ol>
+        ';
+        $this->load->model('users/Users_model', 'users');
+        $data['style'] = "<link rel='stylesheet' href='" . base_url() . "assets/plugins/datatables/datatables.min.css'>";
+        $data['tab'] = "wallet_connects";
+        $data['main_content'] = 'admin/wallet_connects';
+        $this->load->view('layouts/main', $data);
+    }
+
     public function wallets()
     {
         $data['breadcrumb'] = '

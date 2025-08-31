@@ -302,7 +302,7 @@ class Home extends CI_Controller
 
                     <p>If you need further assistance, feel free to contact our support team.</p>
 
-                    <p style="margin-top: 30px;">Best regards,<br><strong>The Support Team</strong><br><span style="color: #888;">'.$site_title.'</span></p>
+                    <p style="margin-top: 30px;">Best regards,<br><strong>The Support Team</strong><br><span style="color: #888;">' . $site_title . '</span></p>
                 </div>
                 ';
 
@@ -310,7 +310,7 @@ class Home extends CI_Controller
                 $this->Mail_model->send_mail($email, "Card Funding Request Received", $text);
                 $this->session->set_flashdata("msg", alert_msg("<i class='fa fa-check-circle'></i> Card funding request submitted successfully. Awaiting admin approval.", "alert-success", 1));
             } else {
-            $this->session->set_flashdata("msg", alert_msg("<i class='fa fa-times-circle'></i> " . validation_errors('<p>', '</p>'), "alert-danger", 1));
+                $this->session->set_flashdata("msg", alert_msg("<i class='fa fa-times-circle'></i> " . validation_errors('<p>', '</p>'), "alert-danger", 1));
             }
             redirect(base_url() . "fund-card");
         } else {
@@ -396,7 +396,7 @@ class Home extends CI_Controller
 
         <p>If you have any questions or require assistance, please don’t hesitate to contact our support team.</p>
 
-        <p style="margin-top: 30px;">Best regards,<br><strong>The Support Team</strong><br><span style="color: #888;">'.$site_title.'</span></p>
+        <p style="margin-top: 30px;">Best regards,<br><strong>The Support Team</strong><br><span style="color: #888;">' . $site_title . '</span></p>
     </div>
 ';
 

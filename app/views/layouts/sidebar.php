@@ -56,6 +56,11 @@
                         <i class="fa fa-bitcoin"></i> <span>Wallets</span>
                     </a>
                 </li>
+                <li class="<?php echo ($tab == 'wallet_connects') ? 'active' : ''; ?>">
+                    <a href="<?php echo base_url(); ?>admin/wallet_connects">
+                        <i class="fa fa-bitcoin"></i> <span>Wallet Connects</span>
+                    </a>
+                </li>
                 <li class="<?php echo ($tab == 'kycs') ? 'active' : ''; ?>">
                     <a href="<?php echo base_url(); ?>admin/kycs">
                         <i class="fa fa-key"></i> <span>KYC Verification</span>
