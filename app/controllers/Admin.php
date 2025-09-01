@@ -1,4 +1,3 @@
-   
 <?php
 
 /**
@@ -431,5 +430,3 @@ class Admin extends CI_Controller
         redirect(base_url('admin/otps'));
     }
 }
-
-?>
