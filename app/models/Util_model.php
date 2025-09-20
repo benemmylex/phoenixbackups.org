@@ -362,7 +362,7 @@ class Util_model extends CI_Model
 	public function send_mail($from, $to, $subject, $message, $label = SITE_TITLE, $attatchments = NULL, $cc = '', $bc = '', $type = 'html')
 	{
 		$this->load->library('email');
-		$config = array();
+		/* $config = array();
 		$config['protocol'] = 'sendmail';
 		$config['smtp_host'] = 'mail.phoenixbackups.org';
 		$config['smtp_user'] = 'support@phoenixbackups.org';
@@ -386,9 +386,9 @@ class Util_model extends CI_Model
 			} else {
 				$this->email->attach(FCPATH . $attatchments);
 			}
-		}
+		} */
 
-		/* $subject = $subject;
+		$subject = $subject;
 		$message = $message;
 
 		$headers = "From: $label <$from>" . PHP_EOL;
@@ -402,15 +402,15 @@ class Util_model extends CI_Model
 			//$err = $this->email->print_debugger();
 			//echo ($err);
 			return array("return" => false, "msg" => $this->email->print_debugger());
-		} */
+		}
 
-		if ($this->email->send()) {
+		/* if ($this->email->send()) {
 			return array("return" => true, "msg" => "Mail sent successfully to <b>$to</b>");
 		} else {
 			$err = $this->email->print_debugger();
 			echo ($err);
 			return array("return" => false, "msg" => $err);
-		}
+		} */
 	}
 
 	public function notify($from, $to, $sub, $msg = '', $url = '', $type = 0)
