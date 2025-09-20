@@ -2535,7 +2535,7 @@ span.h4.d-block.coin-name {
 <!-- Smartsupp Live Chat script -->
 <script type="text/javascript">
 var _smartsupp = _smartsupp || {};
-_smartsupp.key = '73095c396aa37ed0ba999f36b384137a77daddb2';
+_smartsupp.key = '93672d0e45a5a196c07b5371c8455656ca938c0c';
 window.smartsupp||(function(d) {
   var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
   s=d.getElementsByTagName('script')[0];c=d.createElement('script');
